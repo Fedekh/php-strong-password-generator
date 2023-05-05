@@ -1,16 +1,31 @@
 <?php
-$pass = '';
-if (isset($_GET['user-password'])) {
-    if (strlen($_GET['user-password']) >= 8) {
-        $pass = $_GET['user-password'];
-        echo $pass;
+
+$pass = '';                 // variabile vuota
+$password = '';             // variabile vuota
+if (isset($_GET['user-password'])) {        // se è settata la variabile
+    if (intval($_GET['user-password']) >= 8) {      // se la lunghezza della password è maggiore o uguale a 8
+        $pass = intval($_GET['user-password']);     // la variabile pass diventa la lunghezza della password
+        var_dump($_GET['user-password']);
     }
     else {
         echo 'Password troppo corta';
     }
 }
-
 var_dump($pass);
+
+
+function create_password($max_length) {     // funzione che crea la password
+    $all_char = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9','!','£','$','%','&','/','(',')','=','?','^','*','[',']','{','}','#','@']; 
+    $new_password = [];
+    for ($i = 0; $i < $max_length; $i++) { 
+        $new_password[] = $all_char[array_rand($all_char)];
+    }
+    return implode('', $new_password);          // implode trasforma un array in una stringa
+}
+
+$password = create_password($pass);
+var_dump($password);
+
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +59,7 @@ var_dump($pass);
                 <form method="GET" action="index.php">
                     <div class="input-field d-flex flex-column align-items-center">
                         <label class="long" for="long">Inserisci la lunghezza password desiderata:</label>
-                        <input id="long" name="user-password" class="rounded border-0 my-3 w-25" type="text">
+                        <input id="long" name="user-password" class="rounded border-0 my-3 w-25" type="number">
                     </div>
                     <div class="buttons my-5 mx-auto text-center">
                         <button type="submit" class="btn btn-primary align-self">Invia</button>

@@ -23,4 +23,4 @@ Gestire ulteriori parametri per la password: quali caratteri usare fra numeri, l
 Dare all'utente anche la possibilità di permettere o meno la ripetizione di caratteri uguali.
 
 
-// $char = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!£$%&/()=?^*[]{}#@';
+// 
