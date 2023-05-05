@@ -5,11 +5,24 @@ $pass = '';                 // variabile vuota per la lunghezza della password
 $password = '';             // variabile vuota per la password da generare
 $error_message = '';        // variabile vuota per il messaggio di errore
 
+$word= $_GET['words'];      // variabile per la scelta delle lettere
+$number= $_GET['numbers'];  // variabile per la scelta dei numeri
+$symbol= $_GET['symbols'];  // variabile per la scelta dei simboli
+$yes= $_GET['yes'];         // variabile per la scelta delle ripetizioni
+$no= $_GET['no'];          
+
+var_dump($word);
+var_dump($number);
+var_dump($symbol);
+var_dump($yes);
+var_dump($no);
 if (isset($_GET['user-password'])) {                                                         // se è settata la variabile
     if (intval($_GET['user-password']) >= 8) {                                                   // se la lunghezza della password è maggiore o uguale a 8
         $pass = intval($_GET['user-password']);
-        $password = create_password($pass);
+        $password = create_password($pass,$word,$number,$symbol,$yes,$no);
         // var_dump($password);
+    } elseif ($word === null && $number === null && $symbol === null && $yes === null && $no === null) { 
+        $error_message ='Seleziona almeno una opzione, e definisci lunghezza password';    
     } elseif (intval($_GET['user-password']) < 8 && intval($_GET['user-password']) > 0) {      // se la lunghezza della password è minore di 8 e maggiore di 0
         $error_message = 'Password troppo corta';
     } else {
@@ -43,30 +56,73 @@ if (isset($_GET['user-password'])) {                                            
     <div class="wrapper d-flex my-5 justify-content-center text-center align-items-center">
         <div class="ms_container d-flex-column">
 
-            <div class="title text-center">
+            <header class="title text-center">
                 <h1 class="py-2">Strong Generator Password</h1>
                 <h2 class="py-2">Generatore di password</h2>
-            </div>
+            </header>
 
-            <div class="mt-4 rounded py-4">
+
+            <!-- MAIN SECTION -->
+            <section class="mt-4 rounded py-4">
                 <form method="GET" action="index.php">
                     <div class="input-field d-flex flex-column align-items-center">
                         <label class="long" for="long">Inserisci la lunghezza password desiderata, almeno 8 caratteri:</label>
                         <input id="long" name="user-password" class="rounded border-0 my-3 w-25" type="text">
                     </div>
+
+
+                    <!--  BONUS -->
+                    <div class="bonus-choice my-4 d-flex justify-content-between">
+
+                        <div class="typing">
+                            <h5 class="long">Scegli cosa vuoi includere : </h5>
+
+                            <label for="words">Lettere</label> <input type="checkbox" name="words" > <br>
+                            <label for="numbers">Numeri</label> <input type="checkbox" name="numbers"> <br>
+                            <label for="symbols">Simboli</label> <input type="checkbox" name="symbols">
+                        </div>
+
+
+                        <div class="ripetizioni d-flex flex-column">
+
+                            <h5 class="long">Consenti ripetizioni caratteri ?</h5>
+
+                            <div class="yes">
+                                <label for="yes">Si</label>
+                                <input type="radio" name="yes" id="yes" value='true'>
+                            </div>
+
+                            <div class="no">
+                                <label for="no">No</label>
+                                <input type="radio" name="no" id="no" value='false'>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / BONUS -->
+
+
+
+                    <!-- BUTTON SUBMIT & RESET -->
                     <div class="buttons my-5 mx-auto text-center">
                         <button type="submit" class="btn btn-primary align-self">Invia</button>
                         <button type="button" class="btn mx-3 btn-danger align-self"><a href="index.php">RESET</a></button>
                     </div>
+                    <!-- /BUTTON SUBMIT & RESET -->
+
                 </form>
 
+
+                <!-- RESULT PASSWORD -->
                 <div class="password text-center">
                     <h4 class="rounded border-0">
                         <?php echo $error_message; ?>
                     </h4>
                 </div>
+                <!-- /RESULT PASSWORD -->
 
-            </div>
+            </section>
+            <!-- /MAIN SECTION -->
+
         </div>
 </body>
 

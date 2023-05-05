@@ -24,3 +24,7 @@ h4{
     background-color: rgb(49, 45, 40);
     color: greenyellow;
 }
+
+.bonus-choice{
+    gap: 100px;
+}
