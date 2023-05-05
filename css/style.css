@@ -11,10 +11,16 @@ a{
 }
 
 .long{
-    color: rgb(148, 145, 199);
+    color: rgb(135, 129, 247);
+    font-size: 1.2rem;
 }
 
 h4{
+    background-color: rgb(49, 45, 40);
+    color: greenyellow;
+}
+
+.result{
     background-color: rgb(49, 45, 40);
     color: greenyellow;
 }
