@@ -1,30 +1,26 @@
 <?php
 include_once __DIR__ . '/functions.php';     // includo il file functions.php
 
-$pass = '';                 // variabile vuota per la lunghezza della password
-$password = '';             // variabile vuota per la password da generare
-$error_message = '';        // variabile vuota per il messaggio di errore
-
-$word= $_GET['words'];      // variabile per la scelta delle lettere
-$number= $_GET['numbers'];  // variabile per la scelta dei numeri
-$symbol= $_GET['symbols'];  // variabile per la scelta dei simboli
-$yes= $_GET['yes'];         // variabile per la scelta delle ripetizioni
+$pass = '';                                 // variabile vuota per la lunghezza della password
+$password = '';                             // variabile vuota per la password da generare
+$error_message = '';                        // variabile vuota per il messaggio di errore
+                
+$word= $_GET['words'];                      // variabile per la scelta delle lettere
+$number= $_GET['numbers'];                  // variabile per la scelta dei numeri
+$symbol= $_GET['symbols'];                  // variabile per la scelta dei simboli
+$yes= $_GET['yes'];                         // variabile per la scelta delle ripetizioni
 $no= $_GET['no'];          
 
-var_dump($word);
-var_dump($number);
-var_dump($symbol);
-var_dump($yes);
-var_dump($no);
+
 if (isset($_GET['user-password'])) {                                                         // se è settata la variabile
-    if (intval($_GET['user-password']) >= 8) {                                                   // se la lunghezza della password è maggiore o uguale a 8
+    if (intval($_GET['user-password']) >= 8 && ($word !== null || $number !== null || $symbol !== null || $yes !== null || $no !== null)) {                                                   // se la lunghezza della password è maggiore o uguale a 8
         $pass = intval($_GET['user-password']);
         $password = create_password($pass,$word,$number,$symbol,$yes,$no);
         // var_dump($password);
     } elseif ($word === null && $number === null && $symbol === null && $yes === null && $no === null) { 
         $error_message ='Seleziona almeno una opzione, e definisci lunghezza password';    
     } elseif (intval($_GET['user-password']) < 8 && intval($_GET['user-password']) > 0) {      // se la lunghezza della password è minore di 8 e maggiore di 0
-        $error_message = 'Password troppo corta';
+        $error_message = 'Password troppo corta';                                               //intval trasforma la stringa in numero come parseInt in JS
     } else {
         $error_message = 'Lunghezza non inserita';
     }
@@ -75,7 +71,7 @@ if (isset($_GET['user-password'])) {                                            
                     <div class="bonus-choice my-4 d-flex justify-content-between">
 
                         <div class="typing">
-                            <h5 class="long">Scegli cosa vuoi includere : </h5>
+                            <h3 class="long">Scegli cosa vuoi includere : </h3>
 
                             <label for="words">Lettere</label> <input type="checkbox" name="words" > <br>
                             <label for="numbers">Numeri</label> <input type="checkbox" name="numbers"> <br>
@@ -85,7 +81,7 @@ if (isset($_GET['user-password'])) {                                            
 
                         <div class="ripetizioni d-flex flex-column">
 
-                            <h5 class="long">Consenti ripetizioni caratteri ?</h5>
+                            <h3 class="long">Consenti ripetizioni caratteri ?</h3>
 
                             <div class="yes">
                                 <label for="yes">Si</label>
@@ -104,7 +100,7 @@ if (isset($_GET['user-password'])) {                                            
 
                     <!-- BUTTON SUBMIT & RESET -->
                     <div class="buttons my-5 mx-auto text-center">
-                        <button type="submit" class="btn btn-primary align-self">Invia</button>
+                        <button type="submit" class="btn btn-success align-self">INVIA</button>
                         <button type="button" class="btn mx-3 btn-danger align-self"><a href="index.php">RESET</a></button>
                     </div>
                     <!-- /BUTTON SUBMIT & RESET -->
@@ -114,9 +110,9 @@ if (isset($_GET['user-password'])) {                                            
 
                 <!-- RESULT PASSWORD -->
                 <div class="password text-center">
-                    <h4 class="rounded border-0">
+                    <h5 class="rounded border-0">
                         <?php echo $error_message; ?>
-                    </h4>
+                    </h5>
                 </div>
                 <!-- /RESULT PASSWORD -->
 

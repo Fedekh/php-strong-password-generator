@@ -15,7 +15,7 @@ a{
     font-size: 1.2rem;
 }
 
-h4{
+h4, h5{
     background-color: rgb(49, 45, 40);
     color: greenyellow;
 }
