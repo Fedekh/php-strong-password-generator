@@ -1,32 +1,23 @@
 <?php
 
-$pass = '';                 // variabile vuota
-$password = '';             // variabile vuota
-if (isset($_GET['user-password'])) {        // se è settata la variabile
-    if (intval($_GET['user-password']) >= 8) {      // se la lunghezza della password è maggiore o uguale a 8
-        $pass = intval($_GET['user-password']);     // la variabile pass diventa la lunghezza della password
-        var_dump($_GET['user-password']);
-    }
-    else {
-        echo 'Password troppo corta';
+$pass = '';                 // variabile vuota per la lunghezza della password
+$password = '';             // variabile vuota per la password da generare
+$error_message = '';        // variabile vuota per il messaggio di errore
+
+if (isset($_GET['user-password'])) {                                                         // se è settata la variabile
+    if (intval($_GET['user-password']) >= 8) {                                                   // se la lunghezza della password è maggiore o uguale a 8
+        $pass = intval($_GET['user-password']);                                                  // la variabile pass diventa la lunghezza della password
+    } elseif (intval($_GET['user-password']) < 8 && intval($_GET['user-password']) > 0) {      // se la lunghezza della password è minore di 8 e maggiore di 0
+        $error_message = 'Password troppo corta';
+    } else {
+        $error_message = 'Lunghezza non inserita';
     }
 }
-var_dump($pass);
 
-
-function create_password($max_length) {     // funzione che crea la password
-    $all_char = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9','!','£','$','%','&','/','(',')','=','?','^','*','[',']','{','}','#','@']; 
-    $new_password = [];
-    for ($i = 0; $i < $max_length; $i++) { 
-        $new_password[] = $all_char[array_rand($all_char)];
-    }
-    return implode('', $new_password);          // implode trasforma un array in una stringa
-}
-
-$password = create_password($pass);
-var_dump($password);
+include_once __DIR__ . '/functions.php';     // includo il file functions.php
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +49,7 @@ var_dump($password);
             <div class="mt-4 rounded py-4">
                 <form method="GET" action="index.php">
                     <div class="input-field d-flex flex-column align-items-center">
-                        <label class="long" for="long">Inserisci la lunghezza password desiderata:</label>
+                        <label class="long" for="long">Inserisci la lunghezza password desiderata, almeno 8 caratteri:</label>
                         <input id="long" name="user-password" class="rounded border-0 my-3 w-25" type="number">
                     </div>
                     <div class="buttons my-5 mx-auto text-center">
@@ -67,10 +58,21 @@ var_dump($password);
                     </div>
                 </form>
 
-            </div>
+                <div class="password text-center">
+                    <h3 class="py-2">Password generata:</h3>
+                    <h4 class="py-2 rounded border-0">
+                        <?php
+                        if ($error_message != '') { // se la variabile $error_message non è vuota
+                            echo $error_message;    // stampo il messaggio di errore
+                        } else {                    // altrimenti
+                            echo $password;         // stampo la password generata
+                        }
+                        ?>
+                    </h4>
+                </div>
 
+            </div>
         </div>
-    </div>
 </body>
 
 </html>

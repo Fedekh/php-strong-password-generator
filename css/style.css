@@ -13,3 +13,8 @@ a{
 .long{
     color: rgb(148, 145, 199);
 }
+
+h4{
+    background-color: rgb(49, 45, 40);
+    color: greenyellow;
+}
