@@ -22,7 +22,7 @@ session_start();
     <div class="container result text-center w-50 rounded my-5 py-5">
 
         <h4 class="user-password w-50 mx-auto rounded my-5 pt-5">La password consigliata è:
-            <p class="pt-5 text-center mx-auto">
+            <p class="pt-5 success text-center mx-auto">
                 <?php echo $_SESSION['password'] ?>
             </p>
         </h4>

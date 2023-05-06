@@ -28,3 +28,8 @@ h4, h5{
 .bonus-choice{
     gap: 100px;
 }
+
+.success{
+    word-wrap: break-word;
+    word-break: break-all;
+}
