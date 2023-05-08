@@ -1,7 +1,7 @@
     <?php
     session_start();
 
-    function create_password($max_length, $word, $number, $symbol, $yes, $no)
+    function create_password($max_length, $word, $number, $symbol, $yes)
     {
         $all_char = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '!', '£', '$', '%', '&', '/', '(', ')', '=', '?', '^', '*', '[', ']', '{', '}', '#', '@'];
 
@@ -13,7 +13,7 @@
 
         $new_password = [];
 
-        if ($yes === 'true') {                                                  //! BLOCCO DI CODICE PER I CARATTERI CHE SI RIPETONO
+        if ($yes === true) {                                                  //! BLOCCO DI CODICE PER I CARATTERI CHE SI RIPETONO
 
             if ($word === 'on' && $number === 'on' && $symbol === 'on') {          //Ogni tipo 
                 for ($i = 0; $i < $max_length; $i++) {
@@ -50,7 +50,7 @@
                     $new_password[] = $sub_word_simb[array_rand($sub_word_simb)];
                 }
             }
-        } elseif ($no === 'false') {                                          //! BLOCCO DI CODICE PER I CARATTERI CHE NON SI RIPETONO
+        } else {                                          //! BLOCCO DI CODICE PER I CARATTERI CHE NON SI RIPETONO
 
             if ($word === 'on' && $number === 'on' && $symbol === 'on') {               //Ogni tipo
                 for ($i = 0; $i < $max_length; $i++) {

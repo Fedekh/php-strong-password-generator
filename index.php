@@ -8,15 +8,13 @@ $error_message = '';                        // variabile vuota per il messaggio 
 $word= $_GET['words'];                      // variabile per la scelta delle lettere
 $number= $_GET['numbers'];                  // variabile per la scelta dei numeri
 $symbol= $_GET['symbols'];                  // variabile per la scelta dei simboli
-$yes= $_GET['yes'];                         // variabile per la scelta delle ripetizioni
-$no= $_GET['no'];          
-
+$yes= $_GET['yes_no'];                         // variabile per la scelta delle ripetizioni
 
 if (isset($_GET['user-password'])) {                                                         // se è settata la variabile
     if (intval($_GET['user-password']) >= 8 && ($word !== null || $number !== null || $symbol !== null || $yes !== null || $no !== null)) {                                                   // se la lunghezza della password è maggiore o uguale a 8
         $pass = intval($_GET['user-password']);
-        $password = create_password($pass,$word,$number,$symbol,$yes,$no);              
-    } elseif ($word === null && $number === null && $symbol === null && $yes === null && $no === null) { 
+        $password = create_password($pass,$word,$number,$symbol,$yes);              
+    } elseif ($word === null && $number === null && $symbol === null && $yes === null) { 
         $error_message ='Seleziona almeno una opzione, e definisci lunghezza password';    
     } elseif (intval($_GET['user-password']) < 8 && intval($_GET['user-password']) > 0) {      // se la lunghezza della password è minore di 8 e maggiore di 0
         $error_message = 'Password troppo corta';                                               //intval trasforma la stringa in numero come parseInt in JS
@@ -84,7 +82,7 @@ if (isset($_GET['user-password'])) {                                            
 
                             <div class="yes">
                                 <label for="yes">Si</label>
-                                <input type="radio" name="yes_no" id="yes" value='true' >
+                                <input type="radio" name="yes_no" id="yes" value='true' checked >
                             </div>
 
                             <div class="no">
