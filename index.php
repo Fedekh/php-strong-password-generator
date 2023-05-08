@@ -15,8 +15,7 @@ $no= $_GET['no'];
 if (isset($_GET['user-password'])) {                                                         // se è settata la variabile
     if (intval($_GET['user-password']) >= 8 && ($word !== null || $number !== null || $symbol !== null || $yes !== null || $no !== null)) {                                                   // se la lunghezza della password è maggiore o uguale a 8
         $pass = intval($_GET['user-password']);
-        $password = create_password($pass,$word,$number,$symbol,$yes,$no);
-        // var_dump($password);
+        $password = create_password($pass,$word,$number,$symbol,$yes,$no);              
     } elseif ($word === null && $number === null && $symbol === null && $yes === null && $no === null) { 
         $error_message ='Seleziona almeno una opzione, e definisci lunghezza password';    
     } elseif (intval($_GET['user-password']) < 8 && intval($_GET['user-password']) > 0) {      // se la lunghezza della password è minore di 8 e maggiore di 0
@@ -85,12 +84,12 @@ if (isset($_GET['user-password'])) {                                            
 
                             <div class="yes">
                                 <label for="yes">Si</label>
-                                <input type="radio" name="yes" id="yes" value='true'>
+                                <input type="radio" name="yes_no" id="yes" value='true' >
                             </div>
 
                             <div class="no">
                                 <label for="no">No</label>
-                                <input type="radio" name="no" id="no" value='false'>
+                                <input type="radio" name="yes_no" id="no" value='false'>
                             </div>
                         </div>
                     </div>
